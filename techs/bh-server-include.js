@@ -43,11 +43,17 @@ module.exports = require('enb/lib/build-flow').create()
     .saveCache(function (cache) {
         cache.cacheFileInfo('bh-file', this._bhFile);
     })
+    .methods({
+        _preConcatFile: function (file, content) {
+            return content;
+        }
+    })
     .builder(function (bhFiles) {
         var node = this.node;
         var dependencies = {};
         var jsAttrName = this._jsAttrName;
         var jsAttrScheme = this._jsAttrScheme;
+        var _this = this;
         return vow.all([
             vfs.read(this._bhFile, 'utf8').then(function (data) {
                 return data;
@@ -55,8 +61,9 @@ module.exports = require('enb/lib/build-flow').create()
             vow.all(bhFiles.map(function (file) {
                 return vfs.read(file.fullname, 'utf8').then(function (data) {
                     var relPath = node.relativePath(file.fullname);
+                    var processed = bhClientProcessor.process(data);
                     return '// begin: ' + relPath + '\n' +
-                        bhClientProcessor.process(data) + '\n' +
+                        _this._preConcatFile(file, processed) + '\n' +
                         '// end: ' + relPath + '\n';
                 });
             })).then(function (sr) {
