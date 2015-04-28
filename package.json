@@ -35,16 +35,26 @@
   },
   "dependencies": {
     "enb-source-map": "1.5.0",
-    "vow": "0.4.7"
+    "vow": "0.4.7",
+    "vow-node": "^0.3.0"
   },
   "devDependencies": {
     "bh": ">= 1.0.0 < 4.0.0",
     "enb": ">= 0.12.0 < 1.0.0",
     "jscs": "1.8.1",
-    "jshint": "2.5.11"
+    "jshint": "2.5.11",
+    "mock-fs": "2.5.0",
+    "must": "^0.12.0",
+    "mocha": "2.2.4",
+    "phantomjs": "^1.9.16",
+    "mocha-phantomjs": "3.5.3",
+    "serve-static": "^1.9.2",
+    "finalhandler": "^0.3.5",
+    "chai": "^2.2.0"
   },
   "scripts": {
-    "test": "npm run lint",
-    "lint": "jshint . && jscs -c .jscs.js ."
+    "test": "npm run lint && npm run unit",
+    "lint": "jshint . && jscs -c .jscs.js .",
+    "unit": "mocha test/techs --no-timeouts"
   }
 }
