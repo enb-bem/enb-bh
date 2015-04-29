@@ -15,7 +15,7 @@ describe('html-from-bemjson', function () {
                 'block.bh.js': 'module.exports = function(bh) {bh.match("block", function(ctx) {ctx.tag("a");});};'
             },
             bundle: {
-                'bundle.bemjson.js': '({block: \'block\'})',
+                'bundle.bemjson.js': '({ block: "block" })',
                 'bundle.bh.js': fs.readFileSync(bhFilename, 'utf-8')
             }
 

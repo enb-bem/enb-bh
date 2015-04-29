@@ -139,14 +139,14 @@ describe('bh-server-include', function () {
     });
 
     it('must gemerate sourcemap', function () {
-        var options = { sourcemap: true },
-            bhFilename = path.join(__dirname, '..', 'fixtures', 'bh-server-include', 'test.bh.js');
+        var options = {
+                sourcemap: true,
+                bhFile: 'bh.js'
+            },
             scheme = {
-                blocks: {
-                    'block.bh.js': bhWrap('bh.match("block", function(ctx) {ctx.tag("a");});')
-                },
+                blocks: {},
                 bundle: {},
-                'test.bh.js': fs.readFileSync(bhFilename, 'utf-8')
+                'bh.js': 'module.exports = BH;'
             };
 
         scheme[bhCoreFilename] = fs.readFileSync(bhCoreFilename, 'utf-8');
@@ -160,9 +160,7 @@ describe('bh-server-include', function () {
 
         return node.runTechAndGetContent(bhServerInclude, options)
             .spread(function (bh) {
-                var expect = fs.readFileSync('test.bh.js', 'utf-8');
-
-                bh.toString().must.be.eql(expect);
+                bh.toString().must.include('sourceMappingURL');
             });
 
     });
