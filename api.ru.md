@@ -1,17 +1,18 @@
-API технологий
-==============
+# API технологий
 
 Пакет предоставляет следующие технологии:
 
-* для сборки BH-шаблонов: [bh-bundle](#bh-bundle) или [bh-commonjs](#bh-commonjs);
-* для генерации HTML: [bemjson-to-html](#bemjson-to-html).
+* для сборки BH-шаблонов:
+  * [bh-bundle](#bh-bundle)
+  * [bh-commonjs](#bh-commonjs)
+* для генерации HTML:
+  * [bemjson-to-html](#bemjson-to-html)
 
-bh-bundle
----------
+## bh-bundle
 
 Собирает `bh.js`-файлы блоков и ядро в один файл — `?.bh.js`-бандл, который используется для работы как в браузере, так и в Node.js. После сборки не требует подключения исходных файлов шаблонов.
 
-Поддерживает модульные системы [YModules](https://ru.bem.info/tools/bem/modules/) и частично [CommonJS](http://www.commonjs.org/), так как в `bh.js`-файлах функция `require` не будет работать корректно.
+Поддерживает модульные системы [YModules](https://github.com/ymaps/modules/blob/master/README.ru.md) и частично [CommonJS](http://www.commonjs.org/), так как в `bh.js`-файлах функция `require` не будет работать корректно.
 
 Если в исполняемой среде нет ни одной модульной системы, то модуль будет предоставлен в глобальную переменную `BH`.
 
@@ -39,7 +40,7 @@ bh-bundle
 
 Тип: `String`. По умолчанию: `?.files`.
 
-Имя таргета, откуда будет доступен список исходных файлов для сборки. Список файлов предоставляет технология [files](https://ru.bem.info/tools/bem/enb-bem-techs/readme#files) пакета [enb-bem-techs](https://ru.bem.info/tools/bem/enb-bem-techs/readme/).
+Имя таргета, откуда будет доступен список исходных файлов для сборки. Список файлов предоставляет технология [files](https://github.com/enb/enb-bem-techs/blob/master/docs/api/api.ru.md#files) пакета [enb-bem-techs](https://github.com/enb/enb-bem-techs/blob/master/README.ru.md).
 
 #### sourceSuffixes
 
@@ -55,7 +56,7 @@ bh-bundle
 
 Следует использовать, если необходима нестандартная версия [шаблонизатора BH](https://ru.bem.info/technology/bh/).
 
-**Предупреждение:** технология [bh-bundle](#bh-bundle) гарантирует правильную работу только с шаблонизатором BH версии `4.1.0`
+**Важно!** Технология [bh-bundle](#bh-bundle) гарантирует правильную работу только с шаблонизатором BH версии `4.1.0`
 
 #### sourcemap
 
@@ -96,9 +97,7 @@ bh-bundle
 
 Настраивает шаблонизатор BH с помощью переданных опций.
 
-> Возможные настройки описаны в [документации шаблонизатора](https://ru.bem.info/technology/bh/v4.1.1/about/#Настройка).
-
---------------------------------------
+> Возможные настройки описаны в [документации шаблонизатора](https://github.com/bem/bh/blob/master/README.ru.md#Настройка).
 
 **Пример**
 
@@ -124,8 +123,7 @@ var BHBundleTech = require('enb-bh/techs/bh-bundle'),
  };
 ```
 
-bh-commonjs
------------
+## bh-commonjs
 
 Собирает `bh.js`-файлы блоков в один файл — `?.bh.js`-бандл, который используется для работы в Node.js. После сборки требуется наличие всех файлов, подключенных с помощью `require`.
 
@@ -155,7 +153,7 @@ bh-commonjs
 
 Тип: `String`. По умолчанию: `?.files`.
 
-Имя таргета, откуда будет доступен список исходных файлов для сборки. Список файлов предоставляет технология [files](https://github.com/enb/enb-bem-techs/blob/master/docs/api.ru.md#files) пакета [enb-bem-techs](https://github.com/enb/enb-bem-techs/blob/master/README.md).
+Имя таргета, откуда будет доступен список исходных файлов для сборки. Список файлов предоставляет технология [files](https://github.com/enb/enb-bem-techs/blob/master/docs/api/api.ru.md#files) пакета [enb-bem-techs](https://github.com/enb/enb-bem-techs/blob/master/README.ru.md).
 
 #### sourceSuffixes
 
@@ -171,7 +169,7 @@ bh-commonjs
 
 Следует использовать, если необходима нестандартная версия [шаблонизатора BH](https://ru.bem.info/technology/bh/).
 
-**Предупреждение:** технология [bh-commonjs](#bh-commonjs) гарантирует правильную работу только с шаблонизатором BH версии `4.1.0` и выше.
+**Важно!** технология [bh-commonjs](#bh-commonjs) гарантирует правильную работу только с шаблонизатором BH версии `4.1.0` и выше.
 
 #### devMode
 
@@ -193,9 +191,7 @@ bh-commonjs
 
 Настраивает шаблонизатор BH с помощью переданных опций.
 
-> Возможные настройки описаны в [документации шаблонизатора](https://ru.bem.info/technology/bh/v4.1.1/about/#Настройка).
-
---------------------------------------
+> Возможные настройки описаны в [документации шаблонизатора](https://github.com/bem/bh/blob/master/README.ru.md#Настройка).
 
 **Пример**
 
@@ -221,10 +217,9 @@ module.exports = function(config) {
 };
 ```
 
-bemjson-to-html
----------------
+## bemjson-to-html
 
-Предназначена для сборки HTML-файла. Обрабатывает [BEMJSON](https://ru.bem.info/technology/bemjson/current/bemjson/) и скомпилированный `?.bh.js`-файл (результат работы технологий [bh-bundle](#bh-bundle) или [bh-commonjs](#bh-commonjs)) для получения HTML.
+Предназначена для сборки HTML-файла. Обрабатывает [BEMJSON](https://ru.bem.info/platform/bemjson/) и скомпилированный `?.bh.js`-файл (результат работы технологий [bh-bundle](#bh-bundle) или [bh-commonjs](#bh-commonjs)) для получения HTML.
 
 ### Опции
 
@@ -251,8 +246,6 @@ bemjson-to-html
 Тип: `String`. По умолчанию: `?.html`.
 
 HTML-файл — результат применения скомпилированного шаблона к указанному BEMJSON-файлу.
-
----------------------------------
 
 **Пример**
 
